@@ -101,9 +101,6 @@ public class Battle extends Activity {
                 }, 100);
             }
         }, 100);
-
-        //change1
-
     }
 
     private void endAttack() {
