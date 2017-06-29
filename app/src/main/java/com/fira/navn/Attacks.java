@@ -23,9 +23,28 @@ public class Attacks {
     static MediaPlayer AttackSound;
 
     public static void calculateAttacks(Context context, String Attack_ID) {
+        int multiplier;
+        if (Battle.yourTurn) {
+            multiplier = CreatureInfo.level;
+        }else {
+            multiplier = OpponentCreatureInfo.level;
+        }
+
+
 
         if (Attack_ID.equals("TestAttack")) {
-            attackDamage = 5 * CreatureInfo.level;
+            attackDamage = 5 * multiplier;
+            AttackImage1 = context.getResources().getDrawable(R.drawable.test);
+            AttackImage2 = context.getResources().getDrawable(R.drawable.test);
+            AttackImage3 = context.getResources().getDrawable(R.drawable.test);
+            AttackImage4 = context.getResources().getDrawable(R.drawable.test);
+            AttackImage5 = context.getResources().getDrawable(R.drawable.test);
+            AttackImage6 = context.getResources().getDrawable(R.drawable.test);
+            AttackSound = MediaPlayer.create(context, R.raw.slurpelyder);
+        }
+
+        else if (Attack_ID.equals("TestAttack2")) {
+            attackDamage = 10 * multiplier;
             AttackImage1 = context.getResources().getDrawable(R.drawable.test);
             AttackImage2 = context.getResources().getDrawable(R.drawable.test);
             AttackImage3 = context.getResources().getDrawable(R.drawable.test);

@@ -42,9 +42,6 @@ public class Store extends Activity {
 
     ProgressBar progressBar;
 
-    File file;
-    StringBuilder text;
-
     TextView diamondsText;
     TextView coinsText;
 

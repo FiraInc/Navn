@@ -9,7 +9,10 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Random;
 
 /**
  * Created by Johannett321 on 26.06.2017.
@@ -17,11 +20,18 @@ import android.widget.Toast;
 
 public class Battle extends Activity {
 
-    ImageView image1;
+    ImageView opponentAttackEffect;
+    ImageView youAttackEffect;
 
-    Boolean yourTurn = true;
+    static Boolean yourTurn = true;
 
     Boolean againstComputer = true;
+    ImageView image1;
+
+    TextView OpponentHealth;
+    TextView YourHealth;
+    TextView OpponentLevel;
+    TextView YourLevel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +39,29 @@ public class Battle extends Activity {
         setContentView(R.layout.battle);
         findViews();
 
-        image1.setVisibility(View.INVISIBLE);
+        yourTurn = true;
+        againstComputer = true;
+
+        opponentAttackEffect.setVisibility(View.INVISIBLE);
+        youAttackEffect.setVisibility(View.INVISIBLE);
 
 
         OpponentCreatureInfo.generateRandom();
+
+        OpponentHealth.setText("OppoHLT: " + String.valueOf(OpponentCreatureInfo.health));
+        YourHealth.setText("YourHLT: " + String.valueOf(CreatureInfo.health));
+        OpponentLevel.setText("OppoLvl: " + String.valueOf(OpponentCreatureInfo.level));
+        YourLevel.setText("YourLvl: " + String.valueOf(CreatureInfo.level));
     }
 
     private void findViews() {
-        image1 = (ImageView) findViewById(R.id.image1);
+        opponentAttackEffect = (ImageView) findViewById(R.id.opponentAttackEffect);
+        youAttackEffect = (ImageView) findViewById(R.id.youAttackEffect);
+
+        OpponentHealth = (TextView) findViewById(R.id.OpponentHealth);
+        YourHealth = (TextView) findViewById(R.id.YourHealth);
+        OpponentLevel = (TextView) findViewById(R.id.OpponentLevel);
+        YourLevel = (TextView) findViewById(R.id.YourLevel);
     }
 
     public void Attack1(View view) {
@@ -46,13 +71,21 @@ public class Battle extends Activity {
     }
 
     public void Attack2(View view) {
-
+        if (yourTurn) {
+            Attack("TestAttack2");
+        }
     }
 
 
     public void Attack(String attackID) {
         Attacks.calculateAttacks(this, attackID);
         Attacks.AttackSound.start();
+
+        if (yourTurn) {
+            image1 = opponentAttackEffect;
+        }else {
+            image1 = youAttackEffect;
+        }
 
         image1.setImageDrawable(Attacks.AttackImage1);
         image1.setVisibility(View.VISIBLE);
@@ -135,12 +168,17 @@ public class Battle extends Activity {
         if (yourTurn) {
             if (OpponentCreatureInfo.health <= 0) {
                 Toast.makeText(this, "CONGRATS!", Toast.LENGTH_LONG).show();
+                OpponentCreatureInfo.health = 0;
             }
         }else {
             if (CreatureInfo.health <= 0) {
                 Toast.makeText(this, "NOOOO!", Toast.LENGTH_LONG).show();
+                CreatureInfo.health = 0;
             }
         }
+
+        OpponentHealth.setText("OppoHLT: " + String.valueOf(OpponentCreatureInfo.health));
+        YourHealth.setText("YourHLT: " + String.valueOf(CreatureInfo.health));
 
 
 
@@ -150,7 +188,7 @@ public class Battle extends Activity {
         }else {
             yourTurn = true;
         }
-        if (againstComputer && !yourTurn) {
+        if (againstComputer && !yourTurn && OpponentCreatureInfo.health > 0) {
             ComputersTurn();
         }
     }
@@ -161,7 +199,20 @@ public class Battle extends Activity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Attack("TestAttack");
+                Random random = new Random();
+                int randomNumber = random.nextInt(4);
+                if (randomNumber == 0) {
+                    Attack(OpponentCreatureInfo.Attack1);
+                }else if (randomNumber == 1) {
+                    Attack(OpponentCreatureInfo.Attack2);
+                }else if (randomNumber == 2) {
+                    Attack(OpponentCreatureInfo.Attack3);
+                }else if (randomNumber == 3) {
+                    Attack(OpponentCreatureInfo.Attack4);
+                }else {
+                    Attack(OpponentCreatureInfo.Attack1);
+                }
+                Toast.makeText(Battle.this, "Random: " + String.valueOf(randomNumber), Toast.LENGTH_SHORT).show();
             }
         }, 2000);
     }

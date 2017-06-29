@@ -14,6 +14,8 @@ public class PlayerInfo {
     static int coins = 0;
     static int diamonds = 0;
 
+    static int BattleSearcherLevel = 1;
+
     public static void refreshCurrency (Context context){
         coins = Integer.parseInt(ReadWrite.read(context, "CoinsAmount.txt"));
         diamonds = Integer.parseInt(ReadWrite.read(context, "DiamondsAmount.txt"));
