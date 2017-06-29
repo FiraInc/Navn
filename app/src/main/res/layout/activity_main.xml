@@ -9,11 +9,50 @@
 
 
     <ImageView
-        android:id="@+id/creatureImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/creatureBody"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="200dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true" />
+
+    <ImageView
+        android:id="@+id/creatureEyes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    <ImageView
+        android:id="@+id/creatureEyeBrows"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    <ImageView
+        android:id="@+id/creatureMouth"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    <ImageView
+        android:id="@+id/creatureProps"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+
+
+
+
+
 
     <Button
         android:layout_width="wrap_content"
@@ -47,8 +86,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:text="BATTLE"
         android:onClick="battle"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="SWAP"
+        android:onClick="swap"/>
 
 </RelativeLayout>

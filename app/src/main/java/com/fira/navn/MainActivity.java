@@ -9,7 +9,11 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-    ImageView creatureImage;
+    ImageView creatureBody;
+    ImageView creatureEyes;
+    ImageView creatureEyeBrows;
+    ImageView creatureMouth;
+    ImageView creatureProps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +25,39 @@ public class MainActivity extends Activity {
     }
 
     private void findViews() {
-        creatureImage = (ImageView) findViewById(R.id.creatureImage);
+        creatureBody = (ImageView) findViewById(R.id.creatureBody);
+        creatureEyes = (ImageView) findViewById(R.id.creatureEyes);
+        creatureEyeBrows = (ImageView) findViewById(R.id.creatureEyeBrows);
+        creatureMouth = (ImageView) findViewById(R.id.creatureMouth);
+        creatureProps = (ImageView) findViewById(R.id.creatureProps);
+
+        CreatureInfo.loadCreature(this);
+        loadCreature();
+    }
+
+    private void loadCreature() {
+        creatureBody.setImageDrawable(CreatureInfo.creatureBody);
+        creatureEyes.setImageDrawable(CreatureInfo.creatureEyes);
+        creatureEyeBrows.setImageDrawable(CreatureInfo.creatureEyebrows);
+        creatureMouth.setImageDrawable(CreatureInfo.creatureMouth);
+        creatureProps.setImageDrawable(CreatureInfo.creatureProps);
+        creatureProps.setVisibility(View.INVISIBLE);
+    }
+
+    Boolean aBoolean = false;
+
+    public void swap (View view) {
+        if (aBoolean) {
+            CreatureInfo.creatureEyes = getResources().getDrawable(R.drawable.eyes_1);
+            CreatureInfo.creatureMouth = getResources().getDrawable(R.drawable.mouth_1);
+            aBoolean = false;
+        }else {
+            CreatureInfo.creatureEyes = getResources().getDrawable(R.drawable.eyes_2);
+            CreatureInfo.creatureMouth = getResources().getDrawable(R.drawable.mouth_2);
+            aBoolean = true;
+        }
+
+        loadCreature();
     }
 
     @Override

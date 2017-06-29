@@ -50,16 +50,25 @@ public class StoreAdapter extends ArrayAdapter<StoreItems> {
         itemTitle.setText(items.Title);
         itemDescription.setText(items.Description);
         itemPrice.setText(items.Price + "$");
-        amountLeft.setText(items.CurrentAmount);
 
-        final View finalConvertView = convertView;
+        if (!Store.category.equals("Wallpaper")) {
+            amountLeft.setText(items.CurrentAmount);
+        }else {
+            amountLeft.setVisibility(View.INVISIBLE);
+        }
+
         buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PlayerInfo.refreshCurrency(mContext);
                 if (PlayerInfo.coins >= Integer.parseInt(items.Price)) {
-                    ReadWrite.write(mContext, items.Title + "ItemAmount.txt", String.valueOf(Integer.parseInt(ReadWrite.read(mContext, items.Title + "ItemAmount.txt")) + Integer.parseInt(items.Amount)));
-                    PlayerInfo.addCoins(mContext, -Integer.parseInt(items.Price));
+                    if (!Store.category.equals("Wallpaper")) {
+                        ReadWrite.write(mContext, items.Title + "ItemAmount.txt", String.valueOf(Integer.parseInt(ReadWrite.read(mContext, items.Title + "ItemAmount.txt")) + Integer.parseInt(items.Amount)));
+                        PlayerInfo.addCoins(mContext, -Integer.parseInt(items.Price));
+                    }else {
+                        ReadWrite.write(mContext, "CustomWallpaper.txt", items.Title);
+                    }
+
 
                     DiamondsText.setText(String.valueOf(PlayerInfo.diamonds));
                     CoinsText.setText(String.valueOf(PlayerInfo.coins));

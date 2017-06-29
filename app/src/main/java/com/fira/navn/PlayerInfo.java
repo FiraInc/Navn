@@ -31,6 +31,10 @@ public class PlayerInfo {
         ReadWrite.write(context, "DiamondsAmount.txt", String.valueOf(diamonds));
     }
 
+    public static void refreshBattleSearcher (Context context) {
+        BattleSearcherLevel = Integer.parseInt(ReadWrite.read(context, "BattleSearcherItemAmount.txt"));
+    }
+
     public static void diamondsToCoinsConverter(Context context, int diamonds) {
 
         /*

@@ -32,13 +32,13 @@ public class ReadWrite {
             return sb.toString();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return "3";
+            return "0";
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            return "3";
+            return "0";
         } catch (IOException e) {
             e.printStackTrace();
-            return "3";
+            return "0";
         }
     }
 

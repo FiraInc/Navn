@@ -46,6 +46,7 @@ public class Battle extends Activity {
         youAttackEffect.setVisibility(View.INVISIBLE);
 
 
+        PlayerInfo.refreshBattleSearcher(this);
         OpponentCreatureInfo.generateRandom();
 
         OpponentHealth.setText("OppoHLT: " + String.valueOf(OpponentCreatureInfo.health));
@@ -185,7 +186,7 @@ public class Battle extends Activity {
 
         if (yourTurn) {
             yourTurn = false;
-        }else {
+        }else if (CreatureInfo.health > 0){
             yourTurn = true;
         }
         if (againstComputer && !yourTurn && OpponentCreatureInfo.health > 0) {

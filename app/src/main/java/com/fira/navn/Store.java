@@ -89,32 +89,26 @@ public class Store extends Activity {
         String item;
 
         if (category.equals("Food")) {
-            item = "Bread";
-            Items.getItem(this, item);
-            ItemName = Items.itemNameToBeAdded;
-            ItemDesc = Items.itemDescription;
-            ItemCat = Items.itemCategory;
-            ItemAmount = String.valueOf(Items.itemAmountBuy);
-            Price = String.valueOf(Items.itemPrice);
-            imageToAdd = Items.bitmapToBeAdded;
-            currentAmount = String.valueOf(Items.loadAmount(this, item));
-            addItem();
+            itemAdder("Bread");
         }else if (category.equals("Special")) {
-            item = "Egg";
-            Items.getItem(this, item);
-            ItemName = Items.itemNameToBeAdded;
-            ItemDesc = Items.itemDescription;
-            ItemCat = Items.itemCategory;
-            ItemAmount = String.valueOf(Items.itemAmountBuy);
-            Price = String.valueOf(Items.itemPrice);
-            imageToAdd = Items.bitmapToBeAdded;
-            currentAmount = String.valueOf(Items.loadAmount(this, item));
-            addItem();
+            itemAdder("BattleSearcher");
+        }else if (category.equals("Wallpaper")) {
+            itemAdder("White wall");
+            itemAdder("Wooden wall");
         }
-
-
         progressBar.setVisibility(View.INVISIBLE);
+    }
 
+    public void itemAdder(String item) {
+        Items.getItem(this, item);
+        ItemName = Items.itemNameToBeAdded;
+        ItemDesc = Items.itemDescription;
+        ItemCat = Items.itemCategory;
+        ItemAmount = String.valueOf(Items.itemAmountBuy);
+        Price = String.valueOf(Items.itemPrice);
+        imageToAdd = Items.bitmapToBeAdded;
+        currentAmount = String.valueOf(Items.loadAmount(this, item));
+        addItem();
     }
 
     @Override
@@ -214,14 +208,7 @@ public class Store extends Activity {
 
     public void changeCategory(View view) {
         //todo fiks linjen under
-        setContentView(R.layout.activity_main);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        }, 2000);
+        setContentView(R.layout.store_chooser);
     }
 
     public void closeChangeCategory() {
@@ -231,13 +218,18 @@ public class Store extends Activity {
         createOn();
     }
 
-    public void changeCategoryToFood(View view) {
+    public void categoryFood(View view) {
         category = "Food";
         closeChangeCategory();
     }
 
-    public void changeCategoryToSpecial(View view) {
+    public void categorySpecial(View view) {
         category = "Special";
+        closeChangeCategory();
+    }
+
+    public void categoryWallpaper(View view) {
+        category = "Wallpaper";
         closeChangeCategory();
     }
 }

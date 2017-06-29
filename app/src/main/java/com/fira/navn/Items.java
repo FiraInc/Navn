@@ -30,23 +30,42 @@ public class Items {
     public static void getItem (Context mContext, String item) {
         if (item.equals("Bread")) {
             itemNameToBeAdded = item;
-            itemPrice = 350;
+            itemPrice = 5;
             itemAmountToBeAdded = loadAmount(mContext, item);
             Bitmap bm = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.test);
             bitmapToBeAdded = new BitmapDrawable(mContext.getResources(), bm);
             itemCategory = "Food";
             itemDescription = "Well, it's not much";
             itemAmountBuy = 1;
-
-            Log.e("YOUJSB", itemNameToBeAdded);
-        }else if (item.equals("Egg")) {
+        }else if (item.equals("BattleSearcher")) {
             itemNameToBeAdded = item;
-            itemPrice = 7500;
+            PlayerInfo.refreshBattleSearcher(mContext);
+            itemPrice = (100 * PlayerInfo.BattleSearcherLevel) * 2;
             itemAmountToBeAdded = loadAmount(mContext, item);
             Bitmap bm = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.test);
             bitmapToBeAdded = new BitmapDrawable(mContext.getResources(), bm);
-            itemCategory = "Food";
-            itemDescription = "Hatch a new egg";
+            itemCategory = "Special";
+            itemDescription = "Find higher leveled creatures";
+            itemAmountBuy = 1;
+        }else if (item.equals("White wall")) {
+            itemNameToBeAdded = item;
+            PlayerInfo.refreshBattleSearcher(mContext);
+            itemPrice = 10;
+            itemAmountToBeAdded = loadAmount(mContext, item);
+            Bitmap bm = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.test);
+            bitmapToBeAdded = new BitmapDrawable(mContext.getResources(), bm);
+            itemCategory = "Wallpaper";
+            itemDescription = "The standard wall color";
+            itemAmountBuy = 1;
+        }else if (item.equals("Wooden wall")) {
+            itemNameToBeAdded = item;
+            PlayerInfo.refreshBattleSearcher(mContext);
+            itemPrice = 200;
+            itemAmountToBeAdded = loadAmount(mContext, item);
+            Bitmap bm = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.test);
+            bitmapToBeAdded = new BitmapDrawable(mContext.getResources(), bm);
+            itemCategory = "Wallpaper";
+            itemDescription = "Wooden wall";
             itemAmountBuy = 1;
         }
     }

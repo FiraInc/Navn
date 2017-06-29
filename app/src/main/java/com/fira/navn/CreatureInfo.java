@@ -1,6 +1,7 @@
 package com.fira.navn;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -22,46 +23,31 @@ public class CreatureInfo {
     static int thirsty = 0;
     static int health = 0;
 
+    static Drawable creatureBody;
+    static Drawable creatureEyes;
+    static Drawable creatureEyebrows;
+    static Drawable creatureMouth;
+    static Drawable creatureProps;
+
     public static void loadCreature(Context context) {
-        try {
-            name = ReadWrite.read(context, "creatureName.txt");
-            Log.e("So", ReadWrite.read(context, "creatureName.txt") + "1");
-        }catch (Exception e) {
-            Toast.makeText(context, "OH NO!", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-        try {
-            ReadWrite.write(context, "creatureLevel.txt", String.valueOf(level));
-            level = Integer.parseInt(ReadWrite.read(context, "creatureLevel.txt"));
-        }catch (Exception e) {
-            Toast.makeText(context, "OH NO!", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-        try {
-            xp = Integer.parseInt(ReadWrite.read(context, "creatureXP.txt"));
-        }catch (Exception e) {
-            Toast.makeText(context, "OH NO!", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-        try {
-            type = Integer.parseInt(ReadWrite.read(context, "creatureType.txt"));
-        }catch (Exception e) {
-            Toast.makeText(context, "OH NO!", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
+        creatureBody = context.getResources().getDrawable(R.drawable.body_1);
+        creatureEyes = context.getResources().getDrawable(R.drawable.eyes_1);
+        creatureEyebrows = context.getResources().getDrawable(R.drawable.eyebrows_1);
+        creatureMouth = context.getResources().getDrawable(R.drawable.mouth_1);
+        creatureProps = context.getResources().getDrawable(R.drawable.body_1);
+
+
+        name = ReadWrite.read(context, "creatureName.txt");
+        ReadWrite.write(context, "creatureLevel.txt", String.valueOf(level));
+        xp = Integer.parseInt(ReadWrite.read(context, "creatureXP.txt"));
+        type = Integer.parseInt(ReadWrite.read(context, "creatureType.txt"));
+
         calculateFood(context);
-        try {
-            thirsty = Integer.parseInt(ReadWrite.read(context, "creatureThirsty.txt"));
-        }catch (Exception e) {
-            Toast.makeText(context, "OH NO!", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-        try {
-            health = Integer.parseInt(ReadWrite.read(context, "creatureHealth.txt"));
-        }catch (Exception e) {
-            Toast.makeText(context, "OH NO!", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
+        thirsty = Integer.parseInt(ReadWrite.read(context, "creatureThirsty.txt"));
+
+        health = Integer.parseInt(ReadWrite.read(context, "creatureHealth.txt"));
+
+
     }
 
     public static void saveCreature(Context context) {

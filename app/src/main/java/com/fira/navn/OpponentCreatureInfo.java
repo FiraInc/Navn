@@ -26,10 +26,10 @@ public class OpponentCreatureInfo {
         Attack3 = "TestAttack";
         Attack4 = "TestAttack";
 
-        if (PlayerInfo.BattleSearcherLevel == 1) {
-            randomNumber = random.nextInt(4);
-            //randomNumber = randomNumber + 3;
-            randomNumber = randomNumber + 10;
+        if (PlayerInfo.BattleSearcherLevel == 1 || PlayerInfo.BattleSearcherLevel == 0) {
+            randomNumber = random.nextInt(4) + 10;
+        }else if (PlayerInfo.BattleSearcherLevel == 2) {
+            randomNumber = random.nextInt(4) + 20;
         }else {
             randomNumber = 1;
         }
