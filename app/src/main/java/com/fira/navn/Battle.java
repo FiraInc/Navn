@@ -216,4 +216,8 @@ public class Battle extends Activity {
             }
         }, 2000);
     }
+
+
+
+    //HEI
 }
