@@ -44,22 +44,6 @@ public class MainActivity extends Activity {
         creatureProps.setVisibility(View.INVISIBLE);
     }
 
-    Boolean aBoolean = false;
-
-    public void swap (View view) {
-        if (aBoolean) {
-            CreatureInfo.creatureEyes = getResources().getDrawable(R.drawable.eyes_1);
-            CreatureInfo.creatureMouth = getResources().getDrawable(R.drawable.mouth_1);
-            aBoolean = false;
-        }else {
-            CreatureInfo.creatureEyes = getResources().getDrawable(R.drawable.eyes_2);
-            CreatureInfo.creatureMouth = getResources().getDrawable(R.drawable.mouth_2);
-            aBoolean = true;
-        }
-
-        loadCreature();
-    }
-
     @Override
     protected void onPause() {
         CreatureInfo.saveCreature(this);
@@ -78,6 +62,11 @@ public class MainActivity extends Activity {
 
     public void battle(View view) {
         Intent intent = new Intent(this, Battle.class);
+        startActivity(intent);
+    }
+
+    public void openInventory(View view) {
+        Intent intent = new Intent(this, Inventory.class);
         startActivity(intent);
     }
 }

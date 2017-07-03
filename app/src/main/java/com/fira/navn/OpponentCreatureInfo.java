@@ -1,5 +1,8 @@
 package com.fira.navn;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+
 import java.util.Random;
 
 /**
@@ -16,7 +19,18 @@ public class OpponentCreatureInfo {
     static String Attack3;
     static String Attack4;
 
-    public static void generateRandom() {
+    static Drawable creatureBody;
+    static Drawable creatureEyes;
+    static Drawable creatureEyebrows;
+    static Drawable creatureMouth;
+    static Drawable creatureProps;
+
+    static int bodyNumber;
+    static int eyeNumber;
+    static int eyebrowNumber;
+    static int mouthNumber;
+
+    public static void generateRandom(Context context) {
         Random random = new Random();
         int randomNumber;
         level = 10;
@@ -33,8 +47,27 @@ public class OpponentCreatureInfo {
         }else {
             randomNumber = 1;
         }
-
         level = randomNumber;
+
+        randomNumber = random.nextInt(2);
+        bodyNumber = randomNumber;
+        BodyParts.getBody(context, randomNumber);
+        creatureBody = BodyParts.body;
+
+        randomNumber = random.nextInt(2);
+        eyeNumber = randomNumber;
+        BodyParts.getEyes(context, randomNumber);
+        creatureEyes = BodyParts.eyes;
+
+        randomNumber = random.nextInt(1);
+        eyebrowNumber = randomNumber;
+        BodyParts.getEyebrows(context, randomNumber);
+        creatureEyebrows = BodyParts.eyebrows;
+
+        randomNumber = random.nextInt(2);
+        mouthNumber = randomNumber;
+        BodyParts.getMouth(context, randomNumber);
+        creatureMouth = BodyParts.mouth;
     }
 
 }

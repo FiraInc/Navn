@@ -3,6 +3,99 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background1"/>
+
+    <ImageView
+        android:id="@+id/battleGroundYou"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:src="@drawable/battleground1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"/>
+
+    <RelativeLayout
+        android:id="@+id/yourCreature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="20dp">
+
+        <ImageView
+            android:id="@+id/yourCreatureBody"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:src="@drawable/body_1"
+            android:scaleX="-1"/>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/battleGroundOpponent"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:src="@drawable/battleground1"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="200dp"
+        android:layout_marginRight="20dp"/>
+
+    <RelativeLayout
+        android:id="@+id/opponentCreature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="140dp"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:id="@+id/opponentCreatureBody"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:src="@drawable/body_1" />
+
+        <ImageView
+            android:id="@+id/opponentCreatureEyes"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:src="@drawable/body_1" />
+
+        <ImageView
+            android:id="@+id/opponentCreatureEyeBrows"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:src="@drawable/body_1" />
+
+        <ImageView
+            android:id="@+id/opponentCreatureMouth"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:src="@drawable/body_1" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/opponentAttackEffect"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/battleGroundOpponent"
+        android:layout_marginRight="20dp" />
+
+    <ImageView
+        android:id="@+id/youAttackEffect"
+        android:layout_width="200dp"
+        android:layout_height="300dp"
+        android:layout_alignBottom="@id/battleGroundYou"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"/>
+
+
     <LinearLayout
         android:id="@+id/Attacks"
         android:layout_width="wrap_content"
@@ -50,20 +143,6 @@
             android:layout_height="wrap_content"
             android:text=""/>
     </LinearLayout>
-
-
-    <ImageView
-        android:id="@+id/opponentAttackEffect"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerHorizontal="true" />
-
-    <ImageView
-        android:id="@+id/youAttackEffect"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

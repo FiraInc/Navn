@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,10 +19,14 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".MainActivity"/>
         <activity android:name=".ValueChanger"/>
         <activity android:name=".Store"/>
         <activity android:name=".BuyMoney"/>
         <activity android:name=".Battle"/>
+        <activity android:name=".EggHatch"/>
+        <activity android:name=".FirePlace"/>
+        <activity android:name=".Inventory"/>
     </application>
 
 </manifest>

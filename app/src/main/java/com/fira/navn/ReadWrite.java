@@ -1,10 +1,10 @@
 package com.fira.navn;
 
 import android.content.Context;
+import java.util.Calendar;
 import android.util.Log;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -51,5 +51,35 @@ public class ReadWrite {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static int calculateHours(int lastDate, int lastHour) {
+        int hoursGone = 0;
+
+        Calendar calendar = Calendar.getInstance();
+        int nowDate = calendar.get(Calendar.DAY_OF_YEAR);
+        int nowHour = calendar.get(Calendar.HOUR_OF_DAY);
+
+
+        if (lastDate == 0 && lastHour == 0) {
+            hoursGone = 0;
+        }else {
+            if (nowDate == lastDate) {
+                if (nowHour == lastHour) {
+                    hoursGone = 0;
+                }else {
+                    hoursGone = nowHour - lastHour;
+                }
+            }else if (nowDate > lastDate) {
+                int daysGone = nowDate-lastDate;
+                int hoursGone2 = 0;
+                if (daysGone > 1) {
+                    hoursGone2 = (daysGone * 24) - 24;
+                }
+                hoursGone = 24-lastHour + nowHour;
+                hoursGone = hoursGone + hoursGone2;
+            }
+        }
+        return hoursGone;
     }
 }

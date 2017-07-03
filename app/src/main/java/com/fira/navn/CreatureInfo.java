@@ -1,6 +1,7 @@
 package com.fira.navn;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ public class CreatureInfo {
 
     static int level = 15;
     static int xp = 0;
+    static int xpNeeded = 0;
 
     static int type = 0;
     static int food = 0;
@@ -29,16 +31,35 @@ public class CreatureInfo {
     static Drawable creatureMouth;
     static Drawable creatureProps;
 
+    static int bodyNumber = 0;
+    static int eyeNumber;
+    static int eyebrowNumber;
+    static int mouthNumber;
+
     public static void loadCreature(Context context) {
-        creatureBody = context.getResources().getDrawable(R.drawable.body_1);
-        creatureEyes = context.getResources().getDrawable(R.drawable.eyes_1);
-        creatureEyebrows = context.getResources().getDrawable(R.drawable.eyebrows_1);
-        creatureMouth = context.getResources().getDrawable(R.drawable.mouth_1);
+        bodyNumber = Integer.parseInt(ReadWrite.read(context, "creatureBodyNumber.txt"));
+        eyeNumber = Integer.parseInt(ReadWrite.read(context, "creatureEyeNumber.txt"));
+        eyebrowNumber = Integer.parseInt(ReadWrite.read(context, "creatureEyeBrowNumber.txt"));
+        mouthNumber = Integer.parseInt(ReadWrite.read(context, "creatureMouthNumber.txt"));
+
+        BodyParts.getBody(context, bodyNumber);
+        creatureBody = BodyParts.body;
+
+        BodyParts.getEyes(context, eyeNumber);
+        creatureEyes = BodyParts.eyes;
+
+        BodyParts.getEyebrows(context, eyebrowNumber);
+        creatureEyebrows = BodyParts.eyebrows;
+
+        BodyParts.getMouth(context, mouthNumber);
+        creatureMouth = BodyParts.mouth;
+
+
         creatureProps = context.getResources().getDrawable(R.drawable.body_1);
 
 
         name = ReadWrite.read(context, "creatureName.txt");
-        ReadWrite.write(context, "creatureLevel.txt", String.valueOf(level));
+        level = Integer.parseInt(ReadWrite.read(context, "creatureLevel.txt"));
         xp = Integer.parseInt(ReadWrite.read(context, "creatureXP.txt"));
         type = Integer.parseInt(ReadWrite.read(context, "creatureType.txt"));
 
@@ -53,7 +74,6 @@ public class CreatureInfo {
     public static void saveCreature(Context context) {
         //Legg til if creature name = null, take me to a screen where i can give my creature a name
         ReadWrite.write(context, "creatureName.txt", name);
-        ReadWrite.write(context, "creatureName.txt", name);
 
         if (level < 0) {
             level = 1;
@@ -61,10 +81,16 @@ public class CreatureInfo {
 
         ReadWrite.write(context, "creatureLevel.txt", String.valueOf(level));
         ReadWrite.write(context, "creatureXP.txt", String.valueOf(xp));
+        ReadWrite.write(context, "creatureXPNeeded.txt", String.valueOf(xpNeeded));
         ReadWrite.write(context, "creatureType.txt", String.valueOf(type));
         ReadWrite.write(context, "creatureFood.txt", String.valueOf(food));
         ReadWrite.write(context, "creatureThirsty.txt", String.valueOf(thirsty));
         ReadWrite.write(context, "creatureHealth.txt", String.valueOf(health));
+
+        ReadWrite.write(context, "creatureBodyNumber.txt", String.valueOf(bodyNumber));
+        ReadWrite.write(context, "creatureEyeNumber.txt", String.valueOf(eyeNumber));
+        ReadWrite.write(context, "creatureEyeBrowNumber.txt", String.valueOf(eyebrowNumber));
+        ReadWrite.write(context, "creatureMouthNumber.txt", String.valueOf(mouthNumber));
     }
 
 
@@ -140,5 +166,20 @@ public class CreatureInfo {
         ReadWrite.write(context, "lastFoodDate.txt", String.valueOf(nowDate));
         ReadWrite.write(context, "lastFoodHour.txt", String.valueOf(nowHour));
         ReadWrite.write(context, "creatureFood.txt", String.valueOf(food));
+    }
+
+    public static void leveling (Context context, int ExperiencePoints) {
+        xp = xp + ExperiencePoints;
+        xpNeeded = 0;
+
+        if (xp > xpNeeded) {
+            level = level + 1;
+            xp = xp-xpNeeded;
+            xpNeeded = xpNeeded + (xpNeeded/2);
+        }
+
+        ReadWrite.write(context, "creatureLevel.txt", String.valueOf(level));
+        ReadWrite.write(context, "creatureXP.txt", String.valueOf(xp));
+        ReadWrite.write(context, "creatureXPNeeded.txt", String.valueOf(xpNeeded));
     }
 }

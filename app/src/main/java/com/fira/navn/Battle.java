@@ -23,6 +23,13 @@ public class Battle extends Activity {
     ImageView opponentAttackEffect;
     ImageView youAttackEffect;
 
+    ImageView OpponentCreatureBody;
+    ImageView OpponentCreatureEyes;
+    ImageView OpponentCreatureEyebrows;
+    ImageView OpponentCreatureMouth;
+
+    ImageView yourCreatureBody;
+
     static Boolean yourTurn = true;
 
     Boolean againstComputer = true;
@@ -47,7 +54,10 @@ public class Battle extends Activity {
 
 
         PlayerInfo.refreshBattleSearcher(this);
-        OpponentCreatureInfo.generateRandom();
+        OpponentCreatureInfo.generateRandom(this);
+
+        loadYourCreatureGraphics();
+        loadOpponentCreatureGraphics();
 
         OpponentHealth.setText("OppoHLT: " + String.valueOf(OpponentCreatureInfo.health));
         YourHealth.setText("YourHLT: " + String.valueOf(CreatureInfo.health));
@@ -63,6 +73,24 @@ public class Battle extends Activity {
         YourHealth = (TextView) findViewById(R.id.YourHealth);
         OpponentLevel = (TextView) findViewById(R.id.OpponentLevel);
         YourLevel = (TextView) findViewById(R.id.YourLevel);
+
+        OpponentCreatureBody = (ImageView) findViewById(R.id.opponentCreatureBody);
+        OpponentCreatureEyes = (ImageView) findViewById(R.id.opponentCreatureEyes);
+        OpponentCreatureEyebrows = (ImageView) findViewById(R.id.opponentCreatureEyeBrows);
+        OpponentCreatureMouth = (ImageView) findViewById(R.id.opponentCreatureMouth);
+
+        yourCreatureBody = (ImageView) findViewById(R.id.yourCreatureBody);
+    }
+
+    private void loadYourCreatureGraphics() {
+        yourCreatureBody.setImageDrawable(CreatureInfo.creatureBody);
+    }
+
+    private void loadOpponentCreatureGraphics() {
+        OpponentCreatureBody.setImageDrawable(OpponentCreatureInfo.creatureBody);
+        OpponentCreatureEyes.setImageDrawable(OpponentCreatureInfo.creatureEyes);
+        OpponentCreatureMouth.setImageDrawable(OpponentCreatureInfo.creatureMouth);
+        OpponentCreatureEyebrows.setImageDrawable(OpponentCreatureInfo.creatureEyebrows);
     }
 
     public void Attack1(View view) {
@@ -170,6 +198,22 @@ public class Battle extends Activity {
             if (OpponentCreatureInfo.health <= 0) {
                 Toast.makeText(this, "CONGRATS!", Toast.LENGTH_LONG).show();
                 OpponentCreatureInfo.health = 0;
+
+                int levelAmount;
+                if (CreatureInfo.level > OpponentCreatureInfo.level) {
+                    levelAmount = ((CreatureInfo.xpNeeded / (CreatureInfo.level - OpponentCreatureInfo.level)) / CreatureInfo.level)*2;
+                }else if (CreatureInfo.level == OpponentCreatureInfo.level) {
+                    levelAmount = ((CreatureInfo.xpNeeded + (CreatureInfo.xpNeeded/3)) / CreatureInfo.level)*2;
+                }else {
+                    levelAmount = (CreatureInfo.xpNeeded / CreatureInfo.level) + (CreatureInfo.xpNeeded * (OpponentCreatureInfo.level - CreatureInfo.level) /5);
+                }
+                int oldLevel = CreatureInfo.level;
+                CreatureInfo.leveling(this, levelAmount);
+
+                if (CreatureInfo.level > oldLevel) {
+                    //todo level up
+                    Toast.makeText(this, "Grattis!!!", Toast.LENGTH_SHORT).show();
+                }
             }
         }else {
             if (CreatureInfo.health <= 0) {

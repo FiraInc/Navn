@@ -22,6 +22,7 @@ public class Items {
     static int itemPrice;
     static int itemAmountToBeAdded;
     static int itemAmountBuy;
+    static int itemFeedAmount;
     static BitmapDrawable bitmapToBeAdded;
     static String itemDescription;
     static String itemCategory;
@@ -37,6 +38,7 @@ public class Items {
             itemCategory = "Food";
             itemDescription = "Well, it's not much";
             itemAmountBuy = 1;
+            itemFeedAmount = 20;
         }else if (item.equals("BattleSearcher")) {
             itemNameToBeAdded = item;
             PlayerInfo.refreshBattleSearcher(mContext);
