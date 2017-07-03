@@ -15,13 +15,28 @@ public class MainActivity extends Activity {
     ImageView creatureMouth;
     ImageView creatureProps;
 
+    ImageView Wallpaper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViews();
 
+        loadHouse();
+
         CreatureInfo.loadCreature(this);
+    }
+
+    private void loadHouse() {
+        Items.getItem(this, ReadWrite.read(this, "CustomWallpaper.txt"));
+        Wallpaper.setBackground(Items.wallpaper);
+    }
+
+    @Override
+    protected void onResume() {
+        loadHouse();
+        super.onResume();
     }
 
     private void findViews() {
@@ -30,6 +45,8 @@ public class MainActivity extends Activity {
         creatureEyeBrows = (ImageView) findViewById(R.id.creatureEyeBrows);
         creatureMouth = (ImageView) findViewById(R.id.creatureMouth);
         creatureProps = (ImageView) findViewById(R.id.creatureProps);
+
+        Wallpaper = (ImageView) findViewById(R.id.Wallpaper);
 
         CreatureInfo.loadCreature(this);
         loadCreature();

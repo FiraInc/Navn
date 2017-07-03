@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.util.Log;
 
@@ -26,9 +27,11 @@ public class Items {
     static BitmapDrawable bitmapToBeAdded;
     static String itemDescription;
     static String itemCategory;
+    static Drawable wallpaper;
 
 
     public static void getItem (Context mContext, String item) {
+        wallpaper = null;
         if (item.equals("Bread")) {
             itemNameToBeAdded = item;
             itemPrice = 5;
@@ -51,7 +54,6 @@ public class Items {
             itemAmountBuy = 1;
         }else if (item.equals("White wall")) {
             itemNameToBeAdded = item;
-            PlayerInfo.refreshBattleSearcher(mContext);
             itemPrice = 10;
             itemAmountToBeAdded = loadAmount(mContext, item);
             Bitmap bm = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.test);
@@ -59,9 +61,9 @@ public class Items {
             itemCategory = "Wallpaper";
             itemDescription = "The standard wall color";
             itemAmountBuy = 1;
+            wallpaper = mContext.getResources().getDrawable(R.drawable.background1);
         }else if (item.equals("Wooden wall")) {
             itemNameToBeAdded = item;
-            PlayerInfo.refreshBattleSearcher(mContext);
             itemPrice = 200;
             itemAmountToBeAdded = loadAmount(mContext, item);
             Bitmap bm = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.test);

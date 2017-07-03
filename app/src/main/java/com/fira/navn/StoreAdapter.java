@@ -1,5 +1,6 @@
 package com.fira.navn;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -43,13 +44,22 @@ public class StoreAdapter extends ArrayAdapter<StoreItems> {
         ImageView buyButton = (ImageView) convertView.findViewById(R.id.buyButton);
         final TextView itemTitle = (TextView) convertView.findViewById(R.id.itemTitle);
         TextView itemDescription = (TextView) convertView.findViewById(R.id.itemDescription);
-        TextView itemPrice = (TextView) convertView.findViewById(R.id.itemPrice);
+        final TextView itemPrice = (TextView) convertView.findViewById(R.id.itemPrice);
         final TextView amountLeft = (TextView) convertView.findViewById(R.id.amountLeft);
 
         itemImage.setImageBitmap(items.ItemImage.getBitmap());
         itemTitle.setText(items.Title);
         itemDescription.setText(items.Description);
-        itemPrice.setText(items.Price + "$");
+        if (Store.category.equals("Wallpaper")) {
+            if (ReadWrite.read(mContext, "CustomWallpaper.txt").toString().equals(items.Title)) {
+                itemPrice.setText("Current");
+            }else {
+                itemPrice.setText(items.Price + "$");
+            }
+
+        }else {
+            itemPrice.setText(items.Price + "$");
+        }
 
         if (!Store.category.equals("Wallpaper")) {
             amountLeft.setText(items.CurrentAmount);
@@ -64,16 +74,20 @@ public class StoreAdapter extends ArrayAdapter<StoreItems> {
                 if (PlayerInfo.coins >= Integer.parseInt(items.Price)) {
                     if (!Store.category.equals("Wallpaper")) {
                         ReadWrite.write(mContext, items.Title + "ItemAmount.txt", String.valueOf(Integer.parseInt(ReadWrite.read(mContext, items.Title + "ItemAmount.txt")) + Integer.parseInt(items.Amount)));
+                        items.CurrentAmount = String.valueOf(Items.loadAmount(mContext, items.Title));
                         PlayerInfo.addCoins(mContext, -Integer.parseInt(items.Price));
+                        amountLeft.setText(items.CurrentAmount);
                     }else {
-                        ReadWrite.write(mContext, "CustomWallpaper.txt", items.Title);
+                        if (!ReadWrite.read(mContext, "CustomWallpaper.txt").equals(items.Title)) {
+                            ReadWrite.write(mContext, "CustomWallpaper.txt", items.Title);
+                            PlayerInfo.addCoins(mContext, -Integer.parseInt(items.Price));
+                            ((Activity)mContext).finish();
+                        }
                     }
-
 
                     DiamondsText.setText(String.valueOf(PlayerInfo.diamonds));
                     CoinsText.setText(String.valueOf(PlayerInfo.coins));
-                    items.CurrentAmount = String.valueOf(Items.loadAmount(mContext, items.Title));
-                    amountLeft.setText(items.CurrentAmount);
+
                 }else {
                     Intent intent = new Intent("my-integer");
                     intent.putExtra("message", 1);

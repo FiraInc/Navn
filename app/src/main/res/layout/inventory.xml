@@ -7,86 +7,31 @@
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@android:color/holo_orange_light"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/topBar"
-        android:layout_alignTop="@id/topBar">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/holo_orange_dark"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:text="Inventory"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:onClick="storeClicked"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:text="Store"
-                android:onClick="storeClicked"/>
-
-        </RelativeLayout>
-    </LinearLayout>
-
-    <ListView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/topBar"
-        android:layout_above="@+id/bottomBar"
-        android:stretchMode="columnWidth"
-        android:layout_centerInParent="true">
-    </ListView>
-
-    <ImageView
-        android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
         android:background="@android:color/holo_orange_light"
-        android:layout_alignParentBottom="true"
         android:onClick="changeCategory"/>
 
     <TextView
         android:id="@+id/categoryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/bottomBar"
-        android:layout_alignLeft="@id/bottomBar"
-        android:layout_alignBottom="@id/bottomBar"
-        android:layout_alignRight="@id/bottomBar"
+        android:layout_alignTop="@id/topBar"
+        android:layout_alignLeft="@id/topBar"
+        android:layout_alignBottom="@id/topBar"
+        android:layout_alignRight="@id/topBar"
         android:gravity="center"
         android:textSize="17sp"
         android:textColor="@android:color/black"
-        android:text="Food"/>
+        android:text="Food"
+        android:onClick="changeCategory"/>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topBar"
+        android:stretchMode="columnWidth"
+        android:layout_centerInParent="true">
+    </ListView>
 
     <ProgressBar
         android:id="@+id/progressBar"

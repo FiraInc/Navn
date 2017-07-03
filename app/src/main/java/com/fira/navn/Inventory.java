@@ -114,29 +114,12 @@ public class Inventory extends Activity {
         }, 200);
     }
 
-    public void GoHome(View view) {
-        homeGo();
-    }
-
     private void homeGo() {
         super.onBackPressed();
     }
 
-    public void storeClicked(View view) {
-        Intent intent = new Intent(this, Store.class);
-        startActivity(intent);
-        overridePendingTransition(0,0);
-    }
-
     public void changeCategory(View view) {
-        //setContentView(R.layout.category_browser);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        }, 2000);
+        setContentView(R.layout.store_chooser);
     }
 
     public void closeChangeCategory() {
@@ -151,5 +134,20 @@ public class Inventory extends Activity {
                 newItemLoader();
             }
         }, 500);
+    }
+
+    public void categoryFood(View view) {
+        category = "Food";
+        closeChangeCategory();
+    }
+
+    public void categorySpecial(View view) {
+        category = "Special";
+        closeChangeCategory();
+    }
+
+    public void categoryWallpaper(View view) {
+        category = "Wallpaper";
+        closeChangeCategory();
     }
 }
