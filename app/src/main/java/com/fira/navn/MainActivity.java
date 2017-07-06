@@ -3,8 +3,11 @@ package com.fira.navn;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -15,7 +18,18 @@ public class MainActivity extends Activity {
     ImageView creatureMouth;
     ImageView creatureProps;
 
+    RelativeLayout topBarMenu;
+
+    ProgressBar hungerBar;
+    ProgressBar healthProgress;
+    ProgressBar XPProgress;
+
+    TextView level;
+    TextView creatureName;
+
     ImageView Wallpaper;
+
+    Boolean topBarMenuVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +39,15 @@ public class MainActivity extends Activity {
 
         loadHouse();
 
-        CreatureInfo.loadCreature(this);
+        CreatureInfo.loadCreature(this, 0);
+        loadCreature();
+
+        topBarMenu.setVisibility(View.INVISIBLE);
+    }
+
+    public void changeCreature(View view) {
+        Intent intent = new Intent(this, CreatureInventory.class);
+        startActivity(intent);
     }
 
     private void loadHouse() {
@@ -35,6 +57,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onResume() {
+        loadCreature();
         loadHouse();
         super.onResume();
     }
@@ -46,19 +69,31 @@ public class MainActivity extends Activity {
         creatureMouth = (ImageView) findViewById(R.id.creatureMouth);
         creatureProps = (ImageView) findViewById(R.id.creatureProps);
 
+        topBarMenu = (RelativeLayout) findViewById(R.id.topBarMenu);
+
+        hungerBar = (ProgressBar) findViewById(R.id.hungerProgress);
+        healthProgress = (ProgressBar) findViewById(R.id.healthProgress);
+        XPProgress = (ProgressBar) findViewById(R.id.XPProgress);
+
         Wallpaper = (ImageView) findViewById(R.id.Wallpaper);
 
-        CreatureInfo.loadCreature(this);
-        loadCreature();
+        level = (TextView) findViewById(R.id.level);
+        creatureName = (TextView) findViewById(R.id.creatureName);
+
     }
 
     private void loadCreature() {
-        creatureBody.setImageDrawable(CreatureInfo.creatureBody);
-        creatureEyes.setImageDrawable(CreatureInfo.creatureEyes);
-        creatureEyeBrows.setImageDrawable(CreatureInfo.creatureEyebrows);
-        creatureMouth.setImageDrawable(CreatureInfo.creatureMouth);
-        creatureProps.setImageDrawable(CreatureInfo.creatureProps);
+        CreatureInfo.loadCreature(this, CreatureInfo.currentCreature);
+        creatureBody.setImageDrawable(CreatureInfo.CreatureImage);
         creatureProps.setVisibility(View.INVISIBLE);
+
+
+        level.setText(String.valueOf(CreatureInfo.level));
+        creatureName.setText(CreatureInfo.name);
+
+        hungerBar.setProgress(CreatureInfo.food);
+        healthProgress.setProgress(CreatureInfo.health);
+        XPProgress.setProgress((CreatureInfo.xp*100)/CreatureInfo.xpNeeded);
     }
 
     @Override
@@ -77,13 +112,31 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-    public void battle(View view) {
-        Intent intent = new Intent(this, Battle.class);
-        startActivity(intent);
-    }
-
     public void openInventory(View view) {
         Intent intent = new Intent(this, Inventory.class);
         startActivity(intent);
+    }
+
+    public void showTopBarMenu(View view) {
+        if (topBarMenuVisible) {
+            topBarMenuVisible = false;
+            topBarMenu.setVisibility(View.INVISIBLE);
+        }else {
+            topBarMenuVisible = true;
+            topBarMenu.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void openMenu(View view) {
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (topBarMenuVisible) {
+            topBarMenuVisible = false;
+            topBarMenu.setVisibility(View.INVISIBLE);
+        }
     }
 }

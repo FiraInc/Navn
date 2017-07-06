@@ -44,12 +44,14 @@ public class FirePlace extends Activity {
     public static void calculateFire(Context context) {
         int startHour;
         int startDay;
+        int startMinute;
         int burnTime;
         int tempBeforeBurn;
 
         startHour = Integer.parseInt(ReadWrite.read(context, "FireStartHour.txt"));
         startDay = Integer.parseInt(ReadWrite.read(context, "FireStartDate.txt"));
-        int hoursGone = ReadWrite.calculateHours(startDay, startHour);
+        startMinute = Integer.parseInt(ReadWrite.read(context, "FireStartMinute.txt"));
+        int minutesGone = ReadWrite.calculateMinutes(startDay, startHour, startMinute);
         burnTime = Integer.parseInt(ReadWrite.read(context, "FireBurnTime.txt"));
         tempBeforeBurn = Integer.parseInt(ReadWrite.read(context, "FireTempBeforeBurn.txt"));
 
@@ -58,7 +60,7 @@ public class FirePlace extends Activity {
             temperature = 0;
             Log.e("HEIHS", "1");
         }else {
-            if (burnTime <= hoursGone) {
+            if (burnTime*60 <= minutesGone) {
                 isBurning = false;
                 Log.e("HEIHS", "2");
             }else {
@@ -66,10 +68,10 @@ public class FirePlace extends Activity {
                 Log.e("HEIHS", "3");
             }
             if (isBurning) {
-                temperature = hoursGone*15 + tempBeforeBurn;
+                temperature = minutesGone/3 + tempBeforeBurn;
                 Log.e("HEIHS", "4");
             }else {
-                temperature = (burnTime*15 + tempBeforeBurn) - ((hoursGone-burnTime)*10);
+                temperature = ((burnTime/3 + tempBeforeBurn)*60 - ((minutesGone-burnTime*60)*10)/60);
                 Log.e("HEIHS", "5");
             }
         }
@@ -88,6 +90,7 @@ public class FirePlace extends Activity {
         ReadWrite.write(this, "FireBurnTime.txt", String.valueOf(coalAmount));
         ReadWrite.write(this, "FireStartHour.txt", String.valueOf(c.get(Calendar.HOUR_OF_DAY)));
         ReadWrite.write(this, "FireStartDate.txt", String.valueOf(c.get(Calendar.DAY_OF_YEAR)));
+        ReadWrite.write(this, "FireStartMinute.txt", String.valueOf(c.get(Calendar.MINUTE)));
     }
 
     public void RESET(View view) {
@@ -96,5 +99,6 @@ public class FirePlace extends Activity {
         Calendar c = Calendar.getInstance();
         ReadWrite.write(this, "FireStartHour.txt", String.valueOf(c.get(Calendar.HOUR_OF_DAY)));
         ReadWrite.write(this, "FireStartDate.txt", String.valueOf(c.get(Calendar.DAY_OF_YEAR)));
+        ReadWrite.write(this, "FireStartMinute.txt", String.valueOf(c.get(Calendar.MINUTE)));
     }
 }

@@ -6,6 +6,7 @@ import java.util.Random;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,6 +30,8 @@ public class EggHatch extends Activity {
 
     Boolean firstTime = false;
 
+    Boolean canReloadFire = true;
+
 
 
     @Override
@@ -37,7 +40,7 @@ public class EggHatch extends Activity {
         setContentView(R.layout.egg_hatch);
         findViews();
 
-        if (!ReadWrite.read(this, "eggFirstTime.txt").equals("1")) {
+        if (!ReadWrite.read(this, "eggFirstTime" + String.valueOf(CreatureInfo.currentCreature) + ".txt").equals("1")) {
             firstTime = true;
         }
 
@@ -46,16 +49,31 @@ public class EggHatch extends Activity {
         int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
 
         if (firstTime) {
-            ReadWrite.write(this, "eggStartDate.txt", String.valueOf(currentDate));
-            ReadWrite.write(this, "eggStartHour.txt", String.valueOf(currentHour));
+            ReadWrite.write(this, "eggStartDate" + String.valueOf(CreatureInfo.currentCreature) + ".txt", String.valueOf(currentDate));
+            ReadWrite.write(this, "eggStartHour" + String.valueOf(CreatureInfo.currentCreature) + ".txt", String.valueOf(currentHour));
             Random random = new Random();
-            ReadWrite.write(this, "eggCrackTime.txt", String.valueOf(random.nextInt(15) + 15));
+            ReadWrite.write(this, "eggCrackTime" + String.valueOf(CreatureInfo.currentCreature) + ".txt", String.valueOf(random.nextInt(15) + 15));
 
-            Log.e("DATE", ReadWrite.read(this, "eggStartDate.txt") + "2");
-            Log.e("HOUR", ReadWrite.read(this, "eggStartHour.txt") + "2");
+            Log.e("DATE", ReadWrite.read(this, "eggStartDate" + String.valueOf(CreatureInfo.currentCreature) + ".txt") + "2");
+            Log.e("HOUR", ReadWrite.read(this, "eggStartHour" + String.valueOf(CreatureInfo.currentCreature) + ".txt") + "2");
         }
 
         loadStats();
+
+        startFireReloader();
+    }
+
+    private void startFireReloader() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (canReloadFire) {
+                    loadStats();
+                }
+            }
+        }, 10000);
+
     }
 
     private void findViews() {
@@ -79,18 +97,18 @@ public class EggHatch extends Activity {
 
         int hoursGone;
 
-        hoursGone = ReadWrite.calculateHours(Integer.parseInt(ReadWrite.read(this, "eggStartDate.txt")), Integer.parseInt(ReadWrite.read(this, "eggStartHour.txt")));
+        hoursGone = ReadWrite.calculateHours(Integer.parseInt(ReadWrite.read(this, "eggStartDate" + String.valueOf(CreatureInfo.currentCreature) + ".txt")), Integer.parseInt(ReadWrite.read(this, "eggStartHour" + String.valueOf(CreatureInfo.currentCreature) + ".txt")));
 
-        if (hoursGone >= Integer.parseInt(ReadWrite.read(this, "eggCrackTime.txt"))) {
+        if (hoursGone >= Integer.parseInt(ReadWrite.read(this, "eggCrackTime" + String.valueOf(CreatureInfo.currentCreature) + ".txt"))) {
             //todo crack
-            ReadWrite.write(this, "InstallCheck.txt", "1");
+            ReadWrite.write(this, "InstallCheck" + String.valueOf(CreatureInfo.currentCreature) + ".txt", "1");
             generateCreature();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
 
         Log.e("HOURSGONE", String.valueOf(hoursGone));
-        Log.e("CRACKTIME", ReadWrite.read(this, "eggCrackTime.txt"));
+        Log.e("CRACKTIME", ReadWrite.read(this, "eggCrackTime" + String.valueOf(CreatureInfo.currentCreature) + ".txt"));
 
 
 
@@ -103,7 +121,7 @@ public class EggHatch extends Activity {
             backgroundImage.setImageDrawable(getResources().getDrawable(R.drawable.test));
         }
 
-        ReadWrite.write(this, "eggFirstTime.txt", "1");
+        ReadWrite.write(this, "eggFirstTime" + String.valueOf(CreatureInfo.currentCreature) + ".txt", "1");
     }
 
 
@@ -124,10 +142,10 @@ public class EggHatch extends Activity {
         //todo lagre Mat tid
 
         OpponentCreatureInfo.generateRandom(this);
-        CreatureInfo.bodyNumber = OpponentCreatureInfo.bodyNumber;
-        CreatureInfo.eyeNumber = OpponentCreatureInfo.eyeNumber;
-        CreatureInfo.eyebrowNumber = OpponentCreatureInfo.eyebrowNumber;
-        CreatureInfo.mouthNumber = OpponentCreatureInfo.mouthNumber;
+
+        //todo generate random creature
+
+        CreatureInfo.CreatureImage = getResources().getDrawable(R.drawable.test_creature);
 
         CreatureInfo.saveCreature(this);
     }
@@ -135,5 +153,18 @@ public class EggHatch extends Activity {
     public void OpenFire(View view) {
         Intent intent = new Intent(this, FirePlace.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        canReloadFire = true;
+        startFireReloader();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        canReloadFire = false;
     }
 }

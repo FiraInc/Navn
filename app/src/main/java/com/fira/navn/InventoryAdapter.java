@@ -65,6 +65,22 @@ public class InventoryAdapter extends ArrayAdapter<InventoryItems> {
                             ReadWrite.write(mContext, items.Title + "ItemAmount.txt", String.valueOf(Integer.parseInt(ReadWrite.read(mContext, items.Title + "ItemAmount.txt")) - 1));
                             amount.setText(items.Amount);
                         }
+                    }else if (Inventory.category.equals("Special")) {
+                        if (items.Title.contains("Health") && items.Title.contains("Potion") && CreatureInfo.health < 100) {
+                            Items.getItem(mContext, items.Title);
+                            CreatureInfo.fillHealth(mContext, Items.itemHealthAmount);
+                            int x = Integer.parseInt(items.Amount) - 1;
+                            items.Amount = String.valueOf(x);
+                            ReadWrite.write(mContext, items.Title + "ItemAmount.txt", String.valueOf(Integer.parseInt(ReadWrite.read(mContext, items.Title + "ItemAmount.txt")) - 1));
+                            amount.setText(items.Amount);
+                        }else if (items.Title.contains("Experience") && items.Title.contains("Potion")) {
+                            Items.getItem(mContext, items.Title);
+                            CreatureInfo.leveling(mContext, Items.itemXPAmount);
+                            int x = Integer.parseInt(items.Amount) - 1;
+                            items.Amount = String.valueOf(x);
+                            ReadWrite.write(mContext, items.Title + "ItemAmount.txt", String.valueOf(Integer.parseInt(ReadWrite.read(mContext, items.Title + "ItemAmount.txt")) - 1));
+                            amount.setText(items.Amount);
+                        }
                     }
                 }
             }

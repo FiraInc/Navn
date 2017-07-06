@@ -13,86 +13,210 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-
-    <ImageView
-        android:id="@+id/creatureBody"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="200dp"
+    <TextView
+        android:id="@+id/centerer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"/>
 
-    <ImageView
-        android:id="@+id/creatureEyes"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="200dp"
+
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
-
-    <ImageView
-        android:id="@+id/creatureEyeBrows"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="200dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
-
-    <ImageView
-        android:id="@+id/creatureMouth"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="200dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
-
-    <ImageView
-        android:id="@+id/creatureProps"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="200dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:layout_marginTop="20dp">
 
 
+        <ImageView
+            android:id="@+id/creatureBody"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/test_creature"/>
 
+        <ImageView
+            android:id="@+id/creatureEyes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
+        <ImageView
+            android:id="@+id/creatureEyeBrows"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
+        <ImageView
+            android:id="@+id/creatureMouth"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
+        <ImageView
+            android:id="@+id/creatureProps"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Change Values"
-        android:onClick="valuesInfo"/>
+        android:onClick="valuesInfo"
+        android:layout_below="@+id/topBar"/>
 
-    <Button
-        android:layout_width="wrap_content"
+
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/holo_orange_light">
+
+        <TextView
+            android:id="@+id/level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:text="0"
+            android:onClick="showTopBarMenu"/>
+
+        <TextView
+            android:id="@+id/creatureName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:text="Fridtjoff"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="Change"
+            android:onClick="changeCreature"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/topBarMenu"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/centerer"
+        android:layout_below="@id/topBar"
+        android:background="@android:color/holo_orange_light">
+
+        <TextView
+            android:id="@+id/hungerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
+            android:text="Hunger: "/>
+
+        <ProgressBar
+            android:id="@+id/hungerProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_toRightOf="@id/hungerText"
+            android:layout_alignTop="@id/hungerText"
+            android:layout_alignBottom="@id/hungerText"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/healthText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/hungerText"
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
+            android:text="Health: "/>
+
+        <ProgressBar
+            android:id="@+id/healthProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_toRightOf="@id/hungerText"
+            android:layout_alignTop="@id/healthText"
+            android:layout_alignBottom="@id/healthText"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/XPText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/healthText"
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
+            android:text="XP: "
+            android:paddingBottom="10dp"/>
+
+        <ProgressBar
+            android:id="@+id/XPProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_toRightOf="@id/hungerText"
+            android:layout_alignTop="@id/XPText"
+            android:layout_alignBottom="@id/XPText"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"/>
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:text="Phone"
-        android:onClick="openPhone"/>
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/menu"
+        android:onClick="openMenu"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        android:text="Inventory"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/pocket"
         android:onClick="openInventory"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:text="Store"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/store"
         android:onClick="openStore"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="BATTLE"
-        android:onClick="battle"/>
 
 </RelativeLayout>

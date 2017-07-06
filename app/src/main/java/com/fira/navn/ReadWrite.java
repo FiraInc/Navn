@@ -82,4 +82,24 @@ public class ReadWrite {
         }
         return hoursGone;
     }
+
+    public static int calculateMinutes(int lastDate, int lastHour, int lastMinute) {
+        int minutesGone;
+        int hoursGone;
+
+        Calendar calendar = Calendar.getInstance();
+        int nowMinute = calendar.get(Calendar.MINUTE);
+
+        hoursGone = calculateHours(lastDate, lastHour);
+
+        if (lastMinute > nowMinute) {
+            minutesGone = hoursGone*60 + ((60-lastMinute) + nowMinute)-60;
+        }else if (nowMinute > lastMinute) {
+            minutesGone = hoursGone*60 + (nowMinute-lastMinute);
+        }else {
+            minutesGone = 0;
+        }
+
+        return minutesGone;
+    }
 }

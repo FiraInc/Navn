@@ -49,24 +49,36 @@ public class OpponentCreatureInfo {
         }
         level = randomNumber;
 
-        randomNumber = random.nextInt(2);
+        randomNumber = random.nextInt(9);
         bodyNumber = randomNumber;
-        BodyParts.getBody(context, randomNumber);
+
+
+        randomNumber = random.nextInt(9);
+        eyeNumber = randomNumber;
+
+
+        randomNumber = random.nextInt(4);
+        eyebrowNumber = randomNumber;
+
+
+        randomNumber = random.nextInt(12);
+        mouthNumber = randomNumber;
+
+        getGraphicsParts(context);
+
+    }
+
+    public static void getGraphicsParts(Context context) {
+        BodyParts.getBody(context, bodyNumber);
         creatureBody = BodyParts.body;
 
-        randomNumber = random.nextInt(2);
-        eyeNumber = randomNumber;
-        BodyParts.getEyes(context, randomNumber);
+        BodyParts.getEyes(context, eyeNumber);
         creatureEyes = BodyParts.eyes;
 
-        randomNumber = random.nextInt(1);
-        eyebrowNumber = randomNumber;
-        BodyParts.getEyebrows(context, randomNumber);
+        BodyParts.getEyebrows(context, eyebrowNumber);
         creatureEyebrows = BodyParts.eyebrows;
 
-        randomNumber = random.nextInt(2);
-        mouthNumber = randomNumber;
-        BodyParts.getMouth(context, randomNumber);
+        BodyParts.getMouth(context, mouthNumber);
         creatureMouth = BodyParts.mouth;
     }
 

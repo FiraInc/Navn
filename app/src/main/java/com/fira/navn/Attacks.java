@@ -53,5 +53,16 @@ public class Attacks {
             AttackImage6 = context.getResources().getDrawable(R.drawable.test);
             AttackSound = MediaPlayer.create(context, R.raw.slurpelyder);
         }
+
+        else if (Attack_ID.equals("TestAttack3")) {
+            attackDamage = 50 * multiplier;
+            AttackImage1 = context.getResources().getDrawable(R.drawable.test);
+            AttackImage2 = context.getResources().getDrawable(R.drawable.test);
+            AttackImage3 = context.getResources().getDrawable(R.drawable.test);
+            AttackImage4 = context.getResources().getDrawable(R.drawable.test);
+            AttackImage5 = context.getResources().getDrawable(R.drawable.test);
+            AttackImage6 = context.getResources().getDrawable(R.drawable.test);
+            AttackSound = MediaPlayer.create(context, R.raw.slurpelyder);
+        }
     }
 }

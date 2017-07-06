@@ -77,11 +77,12 @@ public class ValueChanger extends Activity {
     }
 
     public void Uninstall(View view) {
-        ReadWrite.write(this, "InstallCheck.txt", "0");
-        ReadWrite.write(this, "eggFirstTime.txt", "0");
-        ReadWrite.write(this, "eggStartDate.txt", String.valueOf(0));
-        ReadWrite.write(this, "eggStartHour.txt", String.valueOf(0));
-        ReadWrite.write(this, "eggCrackTime.txt", "1");
+        //ReadWrite.write(this, "InstallCheck.txt", "0");
+        //ReadWrite.write(this, "eggFirstTime.txt", "0");
+        //ReadWrite.write(this, "eggStartDate.txt", String.valueOf(0));
+        //ReadWrite.write(this, "eggStartHour.txt", String.valueOf(0));
+        //ReadWrite.write(this, "eggCrackTime.txt", "1");
+        ReadWrite.write(this, "BadgesUnlocked.txt", "0");
         Toast.makeText(this, "DONE", Toast.LENGTH_SHORT).show();
     }
 }

@@ -95,30 +95,10 @@
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="10dp"/>
 
-
-    <LinearLayout
-        android:id="@+id/Attacks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Attack1"
-            android:onClick="Attack1"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Attack2"
-            android:onClick="Attack2"/>
-
-    </LinearLayout>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/Attacks">
+        android:orientation="vertical">
         <TextView
             android:id="@+id/OpponentLevel"
             android:layout_width="wrap_content"
@@ -143,6 +123,157 @@
             android:layout_height="wrap_content"
             android:text=""/>
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/holo_orange_light">
+
+        <RelativeLayout
+            android:id="@+id/AttacksButton"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:onClick="showAttacks">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:text="Attacks"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ItemsButton"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:text="Items"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RunButton"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:text="Run"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/AttackMenu"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_above="@id/bottomBar"
+        android:orientation="vertical"
+        android:background="@android:color/holo_orange_light"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:text="Attack1"
+                android:onClick="Attack1"/>
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:text="Attack2"
+                android:onClick="Attack2"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:text="Attack3"
+                android:onClick="Attack3"/>
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:text="Attack4"
+                android:onClick="Attack4"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/bushLeft"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bush_left"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/bushRight"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bush_right"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/blackScreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/middleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:text="Text"
+        android:visibility="gone"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="Catch"
+        android:onClick="Catch"/>
 
 
 </RelativeLayout>

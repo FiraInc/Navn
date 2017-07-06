@@ -92,6 +92,17 @@ public class Store extends Activity {
             itemAdder("Bread");
         }else if (category.equals("Special")) {
             itemAdder("BattleSearcher");
+            itemAdder("Health Potion XSmall");
+            itemAdder("Health Potion Small");
+            itemAdder("Health Potion Medium");
+            itemAdder("Health Potion Large");
+            itemAdder("Health Potion XLarge");
+
+            itemAdder("Experience Potion XSmall");
+            itemAdder("Experience Potion Small");
+            itemAdder("Experience Potion Medium");
+            itemAdder("Experience Potion Large");
+            itemAdder("Experience Potion XLarge");
         }else if (category.equals("Wallpaper")) {
             itemAdder("White wall");
             itemAdder("Wooden wall");
@@ -101,14 +112,16 @@ public class Store extends Activity {
 
     public void itemAdder(String item) {
         Items.getItem(this, item);
-        ItemName = Items.itemNameToBeAdded;
-        ItemDesc = Items.itemDescription;
-        ItemCat = Items.itemCategory;
-        ItemAmount = String.valueOf(Items.itemAmountBuy);
-        Price = String.valueOf(Items.itemPrice);
-        imageToAdd = Items.bitmapToBeAdded;
-        currentAmount = String.valueOf(Items.loadAmount(this, item));
-        addItem();
+        if (Items.requiredLevel <= CreatureInfo.level) {
+            ItemName = Items.itemNameToBeAdded;
+            ItemDesc = Items.itemDescription;
+            ItemCat = Items.itemCategory;
+            ItemAmount = String.valueOf(Items.itemAmountBuy);
+            Price = String.valueOf(Items.itemPrice);
+            imageToAdd = Items.bitmapToBeAdded;
+            currentAmount = String.valueOf(Items.loadAmount(this, item));
+            addItem();
+        }
     }
 
     @Override

@@ -67,22 +67,34 @@ public class Inventory extends Activity {
     private void newItemLoader() {
         adapter.clear();
         if (category.equals("Food")) {
-            itemNameToBeAdded = "Bread";
-            Items.getItem(this, itemNameToBeAdded);
-            itemAmountToBeAdded = String.valueOf(Items.itemAmountToBeAdded);
-            itemDescriptionToBeAdded = Items.itemDescription;
-            bitmapToBeAdded = Items.bitmapToBeAdded;
-            addItem();
+            itemAdder("Bread");
         }else if (category.equals("Special")) {
-            itemNameToBeAdded = "Egg";
-            Items.getItem(this, itemNameToBeAdded);
-            itemAmountToBeAdded = String.valueOf(Items.itemAmountToBeAdded);
-            itemDescriptionToBeAdded = Items.itemDescription;
-            bitmapToBeAdded = Items.bitmapToBeAdded;
-            addItem();
+            itemAdder("Health Potion XSmall");
+            itemAdder("Health Potion Small");
+            itemAdder("Health Potion Medium");
+            itemAdder("Health Potion Large");
+            itemAdder("Health Potion XLarge");
+
+            itemAdder("Experience Potion XSmall");
+            itemAdder("Experience Potion Small");
+            itemAdder("Experience Potion Medium");
+            itemAdder("Experience Potion Large");
+            itemAdder("Experience Potion XLarge");
         }
 
         progressBar.setVisibility(View.INVISIBLE);
+
+    }
+
+    public void itemAdder(String item) {
+        Items.getItem(this, item);
+        if (Items.itemAmountToBeAdded > 0) {
+            itemNameToBeAdded = Items.itemNameToBeAdded;
+            itemDescriptionToBeAdded = Items.itemDescription;
+            bitmapToBeAdded = Items.bitmapToBeAdded;
+            itemAmountToBeAdded = String.valueOf(Items.itemAmountToBeAdded);
+            addItem();
+        }
 
     }
 
